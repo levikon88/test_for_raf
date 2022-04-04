@@ -41,7 +41,6 @@ function makeResult(e) {
 	e.open(`#result`);
 }
 
-
 function isFlexibleModel(answers) {
 	let res =
 		answers[0] === 'a' &&
