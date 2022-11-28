@@ -44,7 +44,7 @@ function makeResult(e) {
 function isFlexibleModel(answers) {
 	let res =
 		answers[0] === 'a' &&
-		answers[1] === 'c' &&
+		(answers[1] === 'c' || answers[1] === 'd') &&
 		(
 			answers[2].includes('b') ||
 			answers[2].includes('c')
@@ -55,12 +55,11 @@ function isFlexibleModel(answers) {
 		) &&
 		answers[7] === 'a' &&
 		answers[10] === 'a';
-	return res ? 'Автономная группа' : null;
+	return res ? 'Гибкая группа' : null;
 }
 
 function isAutonomousGroup(answers) {
 	let res =
-		answers[1] === 'a' &&
 		answers[2] === 'b' &&
 		(
 			answers[5].includes('b') ||
@@ -76,7 +75,6 @@ function isAutonomousGroup(answers) {
 
 function isRotateLabs(answers) {
 	let res =
-		answers[1] === 'a' &&
 		(
 			answers[4].includes('a') ||
 			answers[4].includes('c') ||
@@ -97,7 +95,7 @@ function isRotateLabs(answers) {
 function isRevertClass(answers) {
 	let res =
 		answers[0] === 'a' &&
-		answers[1] === 'b' &&
+		(answers[1] === 'b' || answers[1] === 'c' || answers[1] === 'd' ||) &&
 		(
 			answers[3].includes('b') ||
 			answers[3].includes('c')
@@ -118,7 +116,7 @@ function isRevertClass(answers) {
 }
 
 function isRotateStations(answers) {
-	let res = answers[1] === 'a' &&
+	let res =
 		(
 			answers[4].includes('a') ||
 			answers[4].includes('b') ||
