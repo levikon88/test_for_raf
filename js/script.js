@@ -95,7 +95,7 @@ function isRotateLabs(answers) {
 function isRevertClass(answers) {
 	let res =
 		answers[0] === 'a' &&
-		(answers[1] === 'b' || answers[1] === 'c' || answers[1] === 'd' ||) &&
+		(answers[1] === 'b' || answers[1] === 'c' || answers[1] === 'd') &&
 		(
 			answers[3].includes('b') ||
 			answers[3].includes('c')
