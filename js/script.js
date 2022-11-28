@@ -23,7 +23,7 @@ function makeResult(e) {
 	];
 
 	let valueMethod = 1;
-	let resultText = '<p>Вам подходят следующие системы:</p>';
+	let resultText = '<p>Вам подходят следующие модели смешанного обучения:</p>';
 	const initSize = resultText.length;
 
 	for (let i = 0; i < results.length; i++) {
