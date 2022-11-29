@@ -23,25 +23,33 @@ function makeResult(e) {
 	];
 
 	let valueMethod = 1;
-	let resultText = '<p>Вам подходят следующие модели смешанного обучения:</p>';
+	let resultText = '<p>Вам подходят следующие системы:</p>';
 	const initSize = resultText.length;
 
-	for (let i = 0; i < results.length; i++) {
-		if (results[i] != null) {
-			let line = `${valueMethod}. ${results[i]}`;
+	results.forEach(element => {
+		if (element) {
+			let line = `${valueMethod}. ${element}`;
 			resultText = resultText + `<p>${line}</p>`;
 			valueMethod++;
 		}
-	}
+	});
+
 	if (resultText.length === initSize) {
-		resultText = `<p>К сожалению, Вам не подходит ни одна из представленных моделей. Так как смешанное обучение представляет собой сочетание очного и онлайн-компонентов, крайне важно обратить внимание на материально-техническое обеспечение образовательного процесса. Так, например, для того, чтобы для Вас стала доступна хотя бы одна из моделей, обязательным условием является один из следующих  факторов:</p>
-			<p>наличие у обучающихся личных устройств с выходом в Интернет;</p>
-			<p>наличие устройств для 1/3 группы (компьютеров, планшетов и др.);</p>
-			<p>наличие помещения для зонирования;</p>
-			<p>наличие компьютерного класса или зоны с компьютерами для каждого студента.</p>
+		resultText = `<p>
+			К сожалению, Вам не подходит ни одна из представленных моделей. Так как смешанное обучение 
+			представляет собой сочетание очного и онлайн-компонентов, крайне важно обратить внимание на 
+			материально-техническое обеспечение образовательного процесса. Так, например, для того, чтобы для 
+			Вас стала доступна хотя бы одна из моделей, обязательным условием является один из следующих  факторов:</p>
+			<ul>
+			<li>наличие у обучающихся личных устройств с выходом в Интернет;</li>
+			<li>наличие устройств для 1/3 группы (компьютеров, планшетов и др.);</li>
+			<li>наличие помещения для зонирования;</li>
+			<li>наличие компьютерного класса или зоны с компьютерами для каждого студента.</li>
+			</ul>
 			<p>Кроме того, реализация элемента электронного обучения требует в большинстве случаев от преподавателя среднего или высокого уровня цифровой зрелости.</p>
 			`;
 	}
+
 	let resultPopupText = document.querySelector('.popup__text');
 	resultPopupText.innerHTML = `${resultText}`;
 	e.open(`#result`);
@@ -51,10 +59,7 @@ function isFlexibleModel(answers) {
 	let res =
 		answers[0] === 'a' &&
 		(answers[1] === 'c' || answers[1] === 'd') &&
-		(
-			answers[2].includes('b') ||
-			answers[2].includes('c')
-		) &&
+		(answers[2].includes('b') || answers[2].includes('c')) &&
 		(
 			answers[3].includes('b') ||
 			answers[3].includes('c')
@@ -66,6 +71,7 @@ function isFlexibleModel(answers) {
 
 function isAutonomousGroup(answers) {
 	let res =
+		answers[1] === 'a' &&
 		answers[2] === 'b' &&
 		(
 			answers[5].includes('b') ||
@@ -81,6 +87,7 @@ function isAutonomousGroup(answers) {
 
 function isRotateLabs(answers) {
 	let res =
+		answers[1] === 'a' &&
 		(
 			answers[4].includes('a') ||
 			answers[4].includes('c') ||
@@ -122,7 +129,7 @@ function isRevertClass(answers) {
 }
 
 function isRotateStations(answers) {
-	let res =
+	let res = answers[1] === 'a' &&
 		(
 			answers[4].includes('a') ||
 			answers[4].includes('b') ||
