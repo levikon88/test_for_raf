@@ -1,3 +1,4 @@
+
 function makeResult(e) {
 	let answers = [
 		document.querySelector("[name = 'q1']:checked").value,
@@ -22,31 +23,36 @@ function makeResult(e) {
 		isFlexibleModel(answers)
 	];
 
-	let valueMethod = 1;
+	let count = 1;
 	let resultText = '<p>Вам подходят следующие системы:</p>';
 	const initSize = resultText.length;
 
 	results.forEach(element => {
 		if (element) {
-			let line = `${valueMethod}. ${element}`;
+			let line = `${count}. ${element}`;
 			resultText = resultText + `<p>${line}</p>`;
-			valueMethod++;
+			count++;
 		}
 	});
 
 	if (resultText.length === initSize) {
-		resultText = `<p>
-			К сожалению, Вам не подходит ни одна из представленных моделей. Так как смешанное обучение 
-			представляет собой сочетание очного и онлайн-компонентов, крайне важно обратить внимание на 
-			материально-техническое обеспечение образовательного процесса. Так, например, для того, чтобы для 
-			Вас стала доступна хотя бы одна из моделей, обязательным условием является один из следующих  факторов:</p>
+		resultText = `
+			<p>
+				К сожалению, Вам не подходит ни одна из представленных моделей. Так как смешанное обучение 
+				представляет собой сочетание очного и онлайн-компонентов, крайне важно обратить внимание на 
+				материально-техническое обеспечение образовательного процесса. Так, например, для того, чтобы для 
+				Вас стала доступна хотя бы одна из моделей, обязательным условием является один из следующих  факторов:
+			</p>
 			<ul>
-			<li>наличие у обучающихся личных устройств с выходом в Интернет;</li>
-			<li>наличие устройств для 1/3 группы (компьютеров, планшетов и др.);</li>
-			<li>наличие помещения для зонирования;</li>
-			<li>наличие компьютерного класса или зоны с компьютерами для каждого студента.</li>
+				<li>наличие у обучающихся личных устройств с выходом в Интернет;</li>
+				<li>наличие устройств для 1/3 группы (компьютеров, планшетов и др.);</li>
+				<li>наличие помещения для зонирования;</li>
+				<li>наличие компьютерного класса или зоны с компьютерами для каждого студента.</li>
 			</ul>
-			<p>Кроме того, реализация элемента электронного обучения требует в большинстве случаев от преподавателя среднего или высокого уровня цифровой зрелости.</p>
+			<p>
+				Кроме того, реализация элемента электронного обучения требует в большинстве случаев от преподавателя 
+				среднего или высокого уровня цифровой зрелости.
+			</p>
 			`;
 	}
 
@@ -59,11 +65,8 @@ function isFlexibleModel(answers) {
 	let res =
 		answers[0] === 'a' &&
 		(answers[1] === 'c' || answers[1] === 'd') &&
-		(answers[2].includes('b') || answers[2].includes('c')) &&
-		(
-			answers[3].includes('b') ||
-			answers[3].includes('c')
-		) &&
+		(answers[2] === 'b' || answers[2] === 'c') &&
+		(answers[3].includes('b') || answers[3].includes('c')) &&
 		answers[7] === 'a' &&
 		answers[10] === 'a';
 	return res ? 'Гибкая группа' : null;
@@ -73,35 +76,19 @@ function isAutonomousGroup(answers) {
 	let res =
 		answers[1] === 'a' &&
 		answers[2] === 'b' &&
-		(
-			answers[5].includes('b') ||
-			answers[5].includes('c')
-		) &&
+		(answers[5].includes('b') || answers[5].includes('c')) &&
 		answers[8] === 'a' &&
-		(
-			answers[11].includes('b') ||
-			answers[11].includes('c')
-		);
+		(answers[11].includes('b') || answers[11].includes('c'));
 	return res ? 'Автономная группа' : null;
 }
 
 function isRotateLabs(answers) {
 	let res =
 		answers[1] === 'a' &&
-		(
-			answers[4].includes('a') ||
-			answers[4].includes('c') ||
-			answers[4].includes('d')
-		) &&
-		(
-			answers[5].includes('b') ||
-			answers[5].includes('c')
-		) &&
+		(answers[4].includes('a') || answers[4].includes('c') || answers[4].includes('d')) &&
+		(answers[5].includes('b') || answers[5].includes('c')) &&
 		answers[8] === 'a' &&
-		(
-			answers[11].includes('b') ||
-			answers[11].includes('c')
-		);
+		(answers[11].includes('b') || answers[11].includes('c'));
 	return res ? 'Ротация лабораторий' : null;
 }
 
@@ -109,36 +96,17 @@ function isRevertClass(answers) {
 	let res =
 		answers[0] === 'a' &&
 		(answers[1] === 'b' || answers[1] === 'c' || answers[1] === 'd') &&
-		(
-			answers[3].includes('b') ||
-			answers[3].includes('c')
-		) &&
-		(
-			answers[4].includes('b') ||
-			answers[4].includes('c')
-		) &&
-		(
-			answers[5].includes('b') ||
-			answers[5].includes('c')
-		) &&
-		(
-			answers[11].includes('b') ||
-			answers[11].includes('c')
-		);
+		(answers[3].includes('b') || answers[3].includes('c')) &&
+		(answers[4].includes('b') || answers[4].includes('c')) &&
+		(answers[5].includes('b') || answers[5].includes('c')) &&
+		(answers[11].includes('b') || answers[11].includes('c'));
 	return res ? 'Перевернутый класс' : null;
 }
 
 function isRotateStations(answers) {
 	let res = answers[1] === 'a' &&
-		(
-			answers[4].includes('a') ||
-			answers[4].includes('b') ||
-			answers[4].includes('c')
-		) &&
-		(
-			answers[5].includes('b') ||
-			answers[5].includes('c')
-		) &&
+		(answers[4].includes('a') || answers[4].includes('b') || answers[4].includes('c')) &&
+		(answers[5].includes('b') || answers[5].includes('c')) &&
 		answers[6] === 'a' &&
 		answers[7] === 'a' &&
 		answers[9] === 'a';
